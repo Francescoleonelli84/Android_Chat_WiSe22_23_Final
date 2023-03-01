@@ -1,0 +1,50 @@
+<resources>
+    <string name="text_accounts">All Users</string>
+    <string name="hint_name">Name</string>
+    <string name="hint_email">Email</string>
+    <string name="hint_password">Password</string>
+    <string name="hint_new_password">New Password</string>
+    <string name="hint_confirm_password">Confirm Password</string>
+    <string name="hint_sex">Sex</string>
+    <string name="hint_age">Age</string>
+    <string name="hint_city">City</string>
+    <string name="text_login">Login</string>
+    <string name="text_register">Register</string>
+    <string name="text_verify">verify pin </string>
+    <string name="text_save_profile">Save Profile</string>
+    <string name="error_message_name">Enter Full Name</string>
+    <string name="error_message_email">Enter Valid Email</string>
+    <string name="error_message_age">Enter Age</string>
+    <string name="error_message_password">Enter Password</string>
+    <string name="success_message">Registration Successful</string>
+    <string name="text_not_member">No account yet? Create one</string>
+    <string name="text_already_member">Already a member? Login</string>
+    <string name="error_email_exists">Email Already Exists</string>
+    <string name="error_password_match">Password Does Not Matches</string>
+    <string name="error_invalid_email_password">Wrong Email or Password</string>
+    <string name="error_password_matching">Password does not match with the password in the E-Mail </string>
+    <string name="action_settings">Settings</string>
+    <string name="text_hello">Hello,</string>
+    <string name="app_name">Chat_Project</string>
+    <string name="text_title">Chat_Project</string>
+    <string name="text_change_image">Change Image</string>
+    <string name="text_upload_image">Upload Image</string>
+    <string name="text_save_image">Save Image</string>
+    <string name="text_chat">Message</string>
+    <string name="hint_message_body">Message get here</string>
+    <string name="hint_message_display">Message displays here</string>
+    <string name="message_content">Type your Message Here</string>
+    <string name="text_send_message">Send</string>
+    <string name="text_receive_message">Receive</string>
+
+
+    <string-array name = "uploadImages">
+        <item>Pick from gallery</item>
+        <item>Remove image</item>
+    </string-array>
+
+    <string-array name="itemIds">
+        <item>gallery_image</item>
+        <item>remove_image</item>
+    </string-array>
+</resources>
