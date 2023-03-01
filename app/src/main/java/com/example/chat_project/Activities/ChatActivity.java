@@ -19,6 +19,7 @@ import com.example.chat_project.Model.User;
 import com.example.chat_project.R;
 import com.example.chat_project.Sql.DatabaseHelper;
 import com.example.chat_project.Utils.Constants;
+import com.google.android.material.textfield.TextInputEditText;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -40,8 +41,10 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
     private String time;
     private String email;
     private int id;
-    private int receiver_id = 2;
-    private int sender_id = 1;
+    private int receiver_id;
+
+  //  private int receiver_id = 2;
+    //private int sender_id = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +56,6 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
         email= getIntent().getStringExtra("key_email");
         //sender_id = getUserDetail(email);
 
-
     }
 
     private void initViews() {
@@ -63,7 +65,6 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
         appCompatButtonReceive = (AppCompatButton) findViewById(R.id.btnReceive);
         textOutputMessageContent = (AppCompatTextView) findViewById(R.id.textOutputMessageContent);
         textDisplayMessageContent = (AppCompatTextView) findViewById(R.id.textDisplayMessageContent);
-
     }
 
     private void initListeners() {
@@ -77,8 +78,6 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
         chatMessage = new ChatMessage();
 
     }
-
-
 
 
 
@@ -99,17 +98,21 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
             time = getRequiredTime(tsLong.toString());
             chatMessage.setContent(textInputMessageContent.getText().toString());
             chatMessage.setTime(time);
-            chatMessage.setSender_id(sender_id);
-            chatMessage.setReceiver_id(receiver_id);
+          //  chatMessage.setSender_id(sender_id);
+           // chatMessage.setReceiver_id(receiver_id);
             databaseHelper.insertMessage(chatMessage);
 
-            textOutputMessageContent.setText(time + " "+ "Send to "+receiver_id + "\n" +textInputMessageContent.getText().toString());
+          //  textOutputMessageContent.setText(time + " "+ "Send to "+receiver_id + "\n" +textInputMessageContent.getText().toString());
             emptyInputEditText();
 
             Toast.makeText(this, "Button works", Toast.LENGTH_SHORT).show();
 
         }
     }
+
+
+
+
 
 
     private void ReceiveMessage() {

@@ -18,6 +18,10 @@ import com.example.chat_project.R;
 import com.example.chat_project.Adapters.UsersRecyclerAdapter;
 import com.example.chat_project.Model.User;
 import com.example.chat_project.Sql.DatabaseHelper;
+import com.google.android.material.textfield.TextInputEditText;
+
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,7 +34,9 @@ public class UsersListActivity extends AppCompatActivity implements View.OnClick
     private List<User> listUsers;
     private UsersRecyclerAdapter usersRecyclerAdapter;
     private DatabaseHelper databaseHelper;
+    private TextInputEditText inputUsername;
     private String email;
+    private int receiver_id;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -50,6 +56,7 @@ public class UsersListActivity extends AppCompatActivity implements View.OnClick
         textViewName = (AppCompatTextView) findViewById(R.id.textViewName);
         imageView = (AppCompatImageView)findViewById(R.id.imageViewImage);
         recyclerViewUsers = (RecyclerView) findViewById(R.id.recyclerViewUsers);
+        inputUsername = (TextInputEditText) findViewById(R.id.textInputUsername);
         buttonChat = (AppCompatButton) findViewById(R.id.buttonChat);
     }
     /**
@@ -74,11 +81,15 @@ public class UsersListActivity extends AppCompatActivity implements View.OnClick
 
     }
 
+
+
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.buttonChat:
                 Intent intentChatting = new Intent(getApplicationContext(), ChatActivity.class);
                 intentChatting.putExtra("key_email",email);
+                receiver_id = databaseHelper.getReceiverIdByUsername(inputUsername.toString());
+                intentChatting.putExtra("receiver", receiver_id );
                 startActivity(intentChatting);
                 break;
             case R.id.appCompatButtonRegister:
@@ -103,6 +114,8 @@ public class UsersListActivity extends AppCompatActivity implements View.OnClick
         textViewName.setText("Hello, "+user.getName());
         imageView.setImageBitmap(user.getImage());
     }
+
+
     /**
      * This method is to fetch all user records from SQLite
      */

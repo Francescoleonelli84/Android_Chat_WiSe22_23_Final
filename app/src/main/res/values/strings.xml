@@ -36,6 +36,9 @@
     <string name="message_content">Type your Message Here</string>
     <string name="text_send_message">Send</string>
     <string name="text_receive_message">Receive</string>
+    <string name="open_chat">Open chat</string>
+    <string name="input_name">Input the name of the person</string>
+
 
 
     <string-array name = "uploadImages">

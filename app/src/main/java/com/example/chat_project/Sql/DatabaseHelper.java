@@ -136,6 +136,39 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.close();
     }
 
+    public int getUserIdByUsername(String username) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        int userId = -1;
+        String[] args = {username};
+
+        Cursor cursor = db.rawQuery("SELECT user_id FROM user WHERE user_name = ?", args);
+        if (cursor.moveToFirst()) {
+            userId = cursor.getInt(0);
+        }
+        cursor.close();
+        db.close();
+
+        return userId;
+    }
+
+
+    public int getReceiverIdByUsername(String username) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        int userId = -1;
+        String[] args = {username};
+
+        Cursor cursor = db.rawQuery("SELECT user_id FROM user WHERE user_name = ?", args);
+        if (cursor.moveToFirst()) {
+            userId = cursor.getInt(0);
+        }
+        cursor.close();
+        db.close();
+
+        return userId;
+    }
+
 
 
     /**

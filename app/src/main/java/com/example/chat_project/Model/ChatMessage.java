@@ -7,24 +7,6 @@ public class ChatMessage {
     private String content;
     private String time;
 
-    public int getMessage_id(){return message_id;}
-
-    public String getContent() {
-        return content;
-    }
-
-    public String getTime() {
-        return time;
-    }
-
-    public int getSender_id() {
-        return sender_id;
-    }
-
-    public int getReceiver_id() {
-        return receiver_id;
-    }
-
     public ChatMessage( int message_id, int sender_id, int receiver_id,String content, String time) {
 
         this.message_id = message_id;
@@ -37,6 +19,29 @@ public class ChatMessage {
     public ChatMessage() {
 
     }
+
+
+    public int getMessage_id(){return message_id;}
+
+    public String getContent() {
+        return content;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public int getSender_id() {
+
+
+        return sender_id;
+    }
+
+    public int getReceiver_id() {
+        return receiver_id;
+    }
+
+
 
     public void setMessage_id(int message_id){this.message_id= message_id;}
 
