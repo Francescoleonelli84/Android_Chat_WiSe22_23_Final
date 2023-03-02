@@ -87,7 +87,7 @@
             android:layout_weight="1" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btnOpenChat"
+            android:id="@+id/btnSend"
             android:layout_width="125dp"
             android:layout_height="50dp"
             android:backgroundTint="@color/green_700"

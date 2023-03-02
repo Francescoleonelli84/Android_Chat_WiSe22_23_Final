@@ -61,7 +61,7 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
     private void initViews() {
         linearLayout = (LinearLayout) findViewById(R.id.linearLayout);
         textInputMessageContent = (AppCompatEditText) findViewById(R.id.textInputMessageContent);
-        appCompatButtonSend = (AppCompatButton) findViewById(R.id.btnOpenChat);
+        appCompatButtonSend = (AppCompatButton) findViewById(R.id.btnSend);
         appCompatButtonReceive = (AppCompatButton) findViewById(R.id.btnReceive);
         textOutputMessageContent = (AppCompatTextView) findViewById(R.id.textOutputMessageContent);
         textDisplayMessageContent = (AppCompatTextView) findViewById(R.id.textDisplayMessageContent);
@@ -139,7 +139,7 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.btnOpenChat:
+            case R.id.btnSend:
                 sendMessage();
                 break;
             case R.id.btnReceive:
