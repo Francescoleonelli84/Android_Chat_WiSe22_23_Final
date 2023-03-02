@@ -12,13 +12,48 @@
         android:orientation="horizontal"
         android:padding="16dp">
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/imageView2"
+        <LinearLayout
             android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
-            card_view:srcCompat="@drawable/no_profile_pic" />
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_marginLeft="50dp">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textViewName1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="Name:"
+                android:textStyle="bold" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textViewID2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="ID:"
+                android:textStyle="bold" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textViewAge1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Age:"
+                android:textStyle="bold" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textViewSex1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Sex:"
+                android:textStyle="bold" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textViewCity1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="City"
+                android:textStyle="bold" />
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="100dp"
@@ -30,14 +65,30 @@
                 android:id="@+id/textViewName"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:layout_marginTop="5dp"
+                android:layout_weight="1"
                 android:text="@string/hint_name"
                 android:textColor="@android:color/darker_gray" />
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/textViewSex"
+                android:id="@+id/textViewId"
                 android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/hint_id"
+                android:textColor="@android:color/darker_gray" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textViewAge"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="@string/hint_age"
+                android:textColor="@android:color/darker_gray" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textViewSex"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/hint_sex"
@@ -51,19 +102,6 @@
                 android:textColor="@android:color/darker_gray" />
 
         </LinearLayout>
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/buttonChat"
-            android:layout_width="80dp"
-            android:layout_height="30dp"
-            android:layout_marginTop="19dp"
-            android:layout_marginLeft="25dp"
-            android:background="@drawable/roundbtn"
-            android:backgroundTint="@color/green_700"
-            android:text="@string/text_chat"
-            android:textColor="@color/white"
-            android:textSize="14sp"
-            android:textStyle="bold" />
 
     </LinearLayout>
 

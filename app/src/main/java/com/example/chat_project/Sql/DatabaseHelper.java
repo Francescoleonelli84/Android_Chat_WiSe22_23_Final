@@ -136,41 +136,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.close();
     }
 
-    public int getUserIdByUsername(String username) {
-        SQLiteDatabase db = this.getReadableDatabase();
-
-        int userId = -1;
-        String[] args = {username};
-
-        Cursor cursor = db.rawQuery("SELECT user_id FROM user WHERE user_name = ?", args);
-        if (cursor.moveToFirst()) {
-            userId = cursor.getInt(0);
-        }
-        cursor.close();
-        db.close();
-
-        return userId;
-    }
-
-
-    public int getReceiverIdByUsername(String username) {
-        SQLiteDatabase db = this.getReadableDatabase();
-
-        int userId = -1;
-        String[] args = {username};
-
-        Cursor cursor = db.rawQuery("SELECT user_id FROM user WHERE user_name = ?", args);
-        if (cursor.moveToFirst()) {
-            userId = cursor.getInt(0);
-        }
-        cursor.close();
-        db.close();
-
-        return userId;
-    }
-
-
-
     /**
      * This method is to fetch all user and return the list of user records
      *
@@ -182,6 +147,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String[] columns = {
                 COLUMN_USER_ID,
                 COLUMN_USER_NAME,
+                COLUMN_USER_AGE,
                 COLUMN_USER_SEX,
                 COLUMN_USER_CITY
         };
@@ -209,9 +175,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 User user = new User();
                 user.setId(Integer.parseInt(cursor.getString(cursor.getColumnIndex(COLUMN_USER_ID))));
                 user.setName(cursor.getString(cursor.getColumnIndex(COLUMN_USER_NAME)));
+                user.setAge(Integer.parseInt(cursor.getString(cursor.getColumnIndex(COLUMN_USER_AGE))));
                 user.setSex(cursor.getString(cursor.getColumnIndex(COLUMN_USER_SEX)));
                 user.setCity(cursor.getString(cursor.getColumnIndex(COLUMN_USER_CITY)));
-                //user.setImage(cursor.getString(cursor.getColumnIndex(COLUMN_USER_IMAGE)));
                 // Adding user record to list
                 userList.add(user);
             } while (cursor.moveToNext());
@@ -337,6 +303,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(query,null);
 
         if(cursor.moveToFirst()){
+            int id = cursor.getInt(0);
             String name = cursor.getString(1);
             String password = cursor.getString(3);
             int age = cursor.getInt(4);
@@ -346,6 +313,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             Bitmap bitmap = BitmapFactory.decodeByteArray(imageByte,0,imageByte.length);
 
             User user = new User();
+            user.setId(id);
             user.setName(name);
             user.setPassword(password);
             user.setAge(age);
@@ -354,6 +322,35 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             user.setImage(bitmap);
 
             al.add(user);
+
+        }
+        return al;
+    }
+
+    /**
+     * here need to be fixed!!!!!!!!
+     */
+    public ArrayList<ChatMessage> getMessage(int receiver_id){
+
+        ArrayList<ChatMessage> al = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String query = "SELECT * FROM message WHERE receiver_id ='" + receiver_id + "'";
+        Cursor cursor = db.rawQuery(query,null);
+
+        if(cursor.moveToFirst()){
+            int id = cursor.getInt(0);
+            int sender_id = cursor.getInt(1);
+            String content = cursor.getString(3);
+            String time = cursor.getString(4);
+
+            ChatMessage chatMessage = new ChatMessage();
+            chatMessage.setMessage_id(id);
+            chatMessage.setSender_id(sender_id);
+            chatMessage.setContent(content);
+            chatMessage.setTime(time);
+
+            al.add(chatMessage);
 
         }
         return al;
@@ -377,7 +374,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(COLUMN_USER_IMAGE, imageInBytes);
         // updating row
         db.update(TABLE_USER, values, COLUMN_USER_ID + " = ?", new String[]{String.valueOf(user_id)});
-
         db.close();
     }
     /**
@@ -387,21 +383,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
      */
     public void updateUser(User user) {
         SQLiteDatabase db = this.getWritableDatabase();
-       // Bitmap imageToStoreBitmap = user.getImage();
-       // byteArrayOutputStream = new ByteArrayOutputStream();
-        //imageToStoreBitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
-       // imageInBytes = byteArrayOutputStream.toByteArray();
-
         ContentValues values = new ContentValues();
         values.put(COLUMN_USER_NAME, user.getName());
         values.put(COLUMN_USER_CITY, user.getCity());
         values.put(COLUMN_USER_AGE, user.getAge());
         values.put(COLUMN_USER_SEX, user.getSex());
         values.put(COLUMN_USER_PASSWORD, user.getPassword());
-        // values.put(COLUMN_USER_IMAGE, imageInBytes);
         // updating row
         db.update(TABLE_USER, values, COLUMN_USER_ID + " = ?", new String[]{String.valueOf(user_id)});
-
         db.close();
 
     }

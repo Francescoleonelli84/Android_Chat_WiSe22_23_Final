@@ -9,6 +9,7 @@ import android.view.View;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatButton;
+import androidx.appcompat.widget.AppCompatEditText;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.AppCompatTextView;
 import 	androidx.recyclerview.widget.DefaultItemAnimator;
@@ -20,8 +21,6 @@ import com.example.chat_project.Model.User;
 import com.example.chat_project.Sql.DatabaseHelper;
 import com.google.android.material.textfield.TextInputEditText;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,14 +28,14 @@ public class UsersListActivity extends AppCompatActivity implements View.OnClick
     private final AppCompatActivity activity = UsersListActivity.this;
     private AppCompatTextView textViewName;
     private AppCompatImageView imageView;
-    private AppCompatButton buttonChat;
     private RecyclerView recyclerViewUsers;
+    private AppCompatButton btnOpenChat;
     private List<User> listUsers;
     private UsersRecyclerAdapter usersRecyclerAdapter;
     private DatabaseHelper databaseHelper;
-    private TextInputEditText inputUsername;
+    private AppCompatEditText inputUserID;
     private String email;
-    private int receiver_id;
+    private String receiver_id;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -56,8 +55,9 @@ public class UsersListActivity extends AppCompatActivity implements View.OnClick
         textViewName = (AppCompatTextView) findViewById(R.id.textViewName);
         imageView = (AppCompatImageView)findViewById(R.id.imageViewImage);
         recyclerViewUsers = (RecyclerView) findViewById(R.id.recyclerViewUsers);
-        inputUsername = (TextInputEditText) findViewById(R.id.textInputUsername);
-        buttonChat = (AppCompatButton) findViewById(R.id.buttonChat);
+        inputUserID = (AppCompatEditText) findViewById(R.id.editTextUserID);
+        btnOpenChat = (AppCompatButton) findViewById(R.id.btnOpenChat);
+
     }
     /**
      * This method is to initialize objects to be used
@@ -71,25 +71,22 @@ public class UsersListActivity extends AppCompatActivity implements View.OnClick
         recyclerViewUsers.setHasFixedSize(true);
         recyclerViewUsers.setAdapter(usersRecyclerAdapter);
         databaseHelper = new DatabaseHelper(activity);
-        String emailFromIntent = getIntent().getStringExtra("EMAIL");
-        textViewName.setText(emailFromIntent);
         getDataFromSQLite();
     }
 
     private void initListeners(){
-       buttonChat.setOnClickListener(this);
+       btnOpenChat.setOnClickListener(this);
 
     }
 
-
-
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.buttonChat:
+            case R.id.btnOpenChat:
+                receiver_id = inputUserID.getText().toString().trim();
                 Intent intentChatting = new Intent(getApplicationContext(), ChatActivity.class);
                 intentChatting.putExtra("key_email",email);
-                receiver_id = databaseHelper.getReceiverIdByUsername(inputUsername.toString());
-                intentChatting.putExtra("receiver", receiver_id );
+                intentChatting.putExtra("key_receiver_id", receiver_id);
+                emptyInputEditText();
                 startActivity(intentChatting);
                 break;
             case R.id.appCompatButtonRegister:
@@ -134,5 +131,9 @@ public class UsersListActivity extends AppCompatActivity implements View.OnClick
                 usersRecyclerAdapter.notifyDataSetChanged();
             }
         }.execute();
+    }
+
+    private void emptyInputEditText() {
+        inputUserID.setText(null);
     }
 }

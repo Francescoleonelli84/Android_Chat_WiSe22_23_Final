@@ -5,6 +5,7 @@
     <string name="hint_password">Password</string>
     <string name="hint_new_password">New Password</string>
     <string name="hint_confirm_password">Confirm Password</string>
+    <string name="hint_id">ID</string>
     <string name="hint_sex">Sex</string>
     <string name="hint_age">Age</string>
     <string name="hint_city">City</string>
@@ -35,9 +36,10 @@
     <string name="hint_message_display">Message displays here</string>
     <string name="message_content">Type your Message Here</string>
     <string name="text_send_message">Send</string>
-    <string name="text_receive_message">Receive</string>
+    <string name="text_receive_message">Drag Message from Message Box</string>
     <string name="open_chat">Open chat</string>
-    <string name="input_name">Input the name of the person</string>
+    <string name="set_id">Set ID</string>
+    <string name="input_id">Input the ID of the person, e.g. 2</string>
 
 
 

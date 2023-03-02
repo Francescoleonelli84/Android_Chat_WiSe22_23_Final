@@ -33,7 +33,10 @@ public class UsersRecyclerAdapter extends RecyclerView.Adapter<UsersRecyclerAdap
     public void onBindViewHolder(UserViewHolder holder, int position) {
         holder.textViewName.setText(listUsers.get(position).getName());
         holder.textViewSex.setText(listUsers.get(position).getSex());
+        holder.textViewId.setText(String.valueOf(listUsers.get(position).getId()));
+        holder.textViewAge.setText(String.valueOf(listUsers.get(position).getAge()));
         holder.textViewCity.setText(listUsers.get(position).getCity());
+
     }
 
     @Override
@@ -50,12 +53,16 @@ public class UsersRecyclerAdapter extends RecyclerView.Adapter<UsersRecyclerAdap
 
         public AppCompatTextView textViewName;
         public AppCompatTextView textViewSex;
+        public AppCompatTextView textViewId;
         public AppCompatTextView textViewCity;
+        public AppCompatTextView textViewAge;
 
 
         public UserViewHolder(View view) {
             super(view);
             textViewName = (AppCompatTextView) view.findViewById(R.id.textViewName);
+            textViewId = (AppCompatTextView) view.findViewById(R.id.textViewId);
+            textViewAge = (AppCompatTextView) view.findViewById(R.id.textViewAge);
             textViewSex = (AppCompatTextView) view.findViewById(R.id.textViewSex);
             textViewCity = (AppCompatTextView) view.findViewById(R.id.textViewCity);
         }
