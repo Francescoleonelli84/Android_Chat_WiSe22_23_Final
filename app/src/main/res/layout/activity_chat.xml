@@ -8,24 +8,29 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:layout_weight="1"
-        android:orientation="vertical">
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/textDisplayMessageContent"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/hint_message_display"
-            android:paddingLeft="5dp"
-            android:paddingTop="25dp"
-            android:paddingRight="5dp"
-            android:textSize="16sp" />
-    </ScrollView>
+        android:layout_height="wrap_content"
+        android:orientation="vertical"/>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="85dp"
+        android:layout_height="256dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:paddingLeft="5dp"
+        android:paddingTop="10dp">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewMessages"
+            android:layout_width="match_parent"
+            android:layout_height="290dp">
+
+        </androidx.recyclerview.widget.RecyclerView>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
         android:orientation="horizontal">
 
         <androidx.appcompat.widget.AppCompatButton
@@ -80,11 +85,6 @@
             android:layout_height="50dp"
             android:layout_weight="1"
             android:hint="@string/message_content"/>
-
-        <requestFocus
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnSend"

@@ -33,23 +33,14 @@
     <string name="text_save_image">Save Image</string>
     <string name="text_chat">Message</string>
     <string name="hint_message_body">Message get here</string>
-    <string name="hint_message_display">Message displays here</string>
     <string name="message_content">Type your Message Here</string>
     <string name="text_send_message">Send</string>
     <string name="text_receive_message">Drag Message from Message Box</string>
     <string name="open_chat">Open chat</string>
     <string name="set_id">Set ID</string>
     <string name="input_id">Input the ID of the person, e.g. 2</string>
+    <string name="hint_message_timestamp">Time</string>
+    <string name="hint_message_senderId">SenderID</string>
+    <string name="hint_message_content">MessageContent</string>
 
-
-
-    <string-array name = "uploadImages">
-        <item>Pick from gallery</item>
-        <item>Remove image</item>
-    </string-array>
-
-    <string-array name="itemIds">
-        <item>gallery_image</item>
-        <item>remove_image</item>
-    </string-array>
 </resources>

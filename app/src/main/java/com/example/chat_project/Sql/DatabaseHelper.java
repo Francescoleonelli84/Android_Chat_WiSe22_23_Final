@@ -43,10 +43,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private ByteArrayOutputStream byteArrayOutputStream;
     private byte[] imageInBytes;
 
-
-
-
-
     // create table user -> sql query
     private String CREATE_USER_TABLE = "CREATE TABLE " + TABLE_USER + "("
             + COLUMN_USER_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + COLUMN_USER_NAME + " TEXT,"
@@ -55,9 +51,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     // drop table user sql query
     private String DROP_USER_TABLE = "DROP TABLE IF EXISTS " + TABLE_USER;
 
-
-
-    // create table user -> sql query
+    // create table message -> sql query
     private String CREATE_MESSAGE_TABLE = "CREATE TABLE " + TABLE_MESSAGE + "("
             + COLUMN_MESSAGE_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COLUMN_SENDER_ID + " INTEGER, " + COLUMN_RECEIVER_ID + " INTEGER, "
             + COLUMN_CONTENT + " TEXT, " + COLUMN_MESSAGE_TIME + " TEXT, "
@@ -65,8 +59,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             + " FOREIGN KEY(" + COLUMN_RECEIVER_ID + ")REFERENCES "  + TABLE_USER + "(" + COLUMN_USER_ID + ")" +")";
 
     private String DROP_MESSAGE_TABLE = "DROP TABLE IF EXISTS " + TABLE_MESSAGE;
-
-
 
     /**
      * Constructor
@@ -87,7 +79,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        //Drop User Table if exist
+        //Drop User/Message Table if exist
         db.execSQL(DROP_USER_TABLE);
         db.execSQL(DROP_MESSAGE_TABLE);
         // Create tables again
@@ -121,7 +113,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.close();
 
     }
-
+    /**
+     * This method is to create chatMessage record
+     *
+     * @param chatMessage
+     */
     public void insertMessage(ChatMessage chatMessage){
 
         SQLiteDatabase db = this.getWritableDatabase();
@@ -189,6 +185,36 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     /**
+     * This method is to fetch all messages and return the list of message records
+     *
+     * @return chatMessageList
+     */
+    @SuppressLint("Range")
+    public List<ChatMessage> getAllChatMessages(int receiver_id) {
+
+        List<ChatMessage> chatMessageList = new ArrayList<ChatMessage>();
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String query = "SELECT * FROM message WHERE receiver_id ='" + receiver_id + "'";
+        Cursor cursor = db.rawQuery(query,null);
+        // Traversing through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            do {
+                ChatMessage chatMessage = new ChatMessage();
+                chatMessage.setSender_id(Integer.parseInt(cursor.getString(cursor.getColumnIndex(COLUMN_SENDER_ID))));
+                chatMessage.setTime(cursor.getString(cursor.getColumnIndex(COLUMN_MESSAGE_TIME)));
+                chatMessage.setContent(cursor.getString(cursor.getColumnIndex(COLUMN_CONTENT)));
+                // Adding chatMessage record to list
+                chatMessageList.add(chatMessage);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+        // return chatMessage list
+        return chatMessageList;
+    }
+
+    /**
      * This method is to delete user record
      *
      * @param user
@@ -209,8 +235,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
      */
     public boolean checkRegisteredUser(String email) {
         // array of columns to fetch
-
-
         String[] id = {
                 COLUMN_USER_ID
         };
@@ -222,7 +246,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         // query user table with condition
         /**
          * SQL equivalent to this query is:
-         * SELECT user_id FROM user WHERE user_email = 'user@email.de' AND user_password = '123password';
+         * SELECT user_id FROM user WHERE user_email = 'user@email.de'
          */
         Cursor cursor = db.query(TABLE_USER, //Table to query
                 id,                    //columns to return
@@ -322,35 +346,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             user.setImage(bitmap);
 
             al.add(user);
-
-        }
-        return al;
-    }
-
-    /**
-     * here need to be fixed!!!!!!!!
-     */
-    public ArrayList<ChatMessage> getMessage(int receiver_id){
-
-        ArrayList<ChatMessage> al = new ArrayList<>();
-        SQLiteDatabase db = this.getReadableDatabase();
-
-        String query = "SELECT * FROM message WHERE receiver_id ='" + receiver_id + "'";
-        Cursor cursor = db.rawQuery(query,null);
-
-        if(cursor.moveToFirst()){
-            int id = cursor.getInt(0);
-            int sender_id = cursor.getInt(1);
-            String content = cursor.getString(3);
-            String time = cursor.getString(4);
-
-            ChatMessage chatMessage = new ChatMessage();
-            chatMessage.setMessage_id(id);
-            chatMessage.setSender_id(sender_id);
-            chatMessage.setContent(content);
-            chatMessage.setTime(time);
-
-            al.add(chatMessage);
 
         }
         return al;
