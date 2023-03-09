@@ -18,7 +18,7 @@ import java.util.List;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
     // Database Version
-    private static final int DATABASE_VERSION = 17;
+    private static final int DATABASE_VERSION = 18;
     // Database Name
     private static final String DATABASE_NAME = "UserManager.db";
     // User table name
@@ -138,33 +138,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
      * @return list
      */
     @SuppressLint("Range")
-    public List<User> getAllUser() {
-        // array of columns to fetch
-        String[] columns = {
-                COLUMN_USER_ID,
-                COLUMN_USER_NAME,
-                COLUMN_USER_AGE,
-                COLUMN_USER_SEX,
-                COLUMN_USER_CITY
-        };
-        // sorting orders
-        String sortOrder =
-                COLUMN_USER_NAME + " ASC";
+    public List<User> getAllUser(String email) {
+
         List<User> userList = new ArrayList<User>();
         SQLiteDatabase db = this.getReadableDatabase();
         // query the user table
-        /**
-         * Here query function is used to fetch records from user table this function works like we use sql query.
-         * SQL query equivalent to this query function is
-         * SELECT user_id,user_name,user_email,user_password FROM user ORDER BY user_name;
-         */
-        Cursor cursor = db.query(TABLE_USER, //Table to query
-                columns,    //columns to return
-                null,        //columns for the WHERE clause
-                null,        //The values for the WHERE clause
-                null,       //group the rows
-                null,       //filter by row groups
-                sortOrder); //The sort order
+        String query = "SELECT * FROM user WHERE user_email !='" + email + "'";
+        Cursor cursor = db.rawQuery(query,null);
         // Traversing through all rows and adding to list
         if (cursor.moveToFirst()) {
             do {
@@ -228,7 +208,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     /**
-     * This method to check user exist or not
+     * This method to check user(email) exist or not
      *
      * @param email
      * @return true/false
@@ -266,7 +246,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 
     /**
-     * This method to check user exist or not
+     * This method to validate user email and password
      *
      * @param email
      * @param password

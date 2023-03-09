@@ -82,7 +82,7 @@
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/textInputMessageContent"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="80dp"
             android:layout_weight="1"
             android:hint="@string/message_content"/>
 

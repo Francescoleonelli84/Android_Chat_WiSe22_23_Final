@@ -19,7 +19,6 @@ import com.example.chat_project.R;
 import com.example.chat_project.Adapters.UsersRecyclerAdapter;
 import com.example.chat_project.Model.User;
 import com.example.chat_project.Sql.DatabaseHelper;
-import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,6 +29,7 @@ public class UsersListActivity extends AppCompatActivity implements View.OnClick
     private AppCompatImageView imageView;
     private RecyclerView recyclerViewUsers;
     private AppCompatButton btnOpenChat;
+    private AppCompatTextView appCompatTextViewEditProfileLink;
     private List<User> listUsers;
     private UsersRecyclerAdapter usersRecyclerAdapter;
     private DatabaseHelper databaseHelper;
@@ -57,6 +57,7 @@ public class UsersListActivity extends AppCompatActivity implements View.OnClick
         recyclerViewUsers = (RecyclerView) findViewById(R.id.recyclerViewUsers);
         inputUserID = (AppCompatEditText) findViewById(R.id.editTextUserID);
         btnOpenChat = (AppCompatButton) findViewById(R.id.btnOpenChat);
+        appCompatTextViewEditProfileLink = (AppCompatTextView) findViewById(R.id.appCompatTextViewEditProfileLink);
 
     }
     /**
@@ -76,7 +77,7 @@ public class UsersListActivity extends AppCompatActivity implements View.OnClick
 
     private void initListeners(){
        btnOpenChat.setOnClickListener(this);
-
+       appCompatTextViewEditProfileLink.setOnClickListener(this);
     }
 
     public void onClick(View v) {
@@ -89,11 +90,11 @@ public class UsersListActivity extends AppCompatActivity implements View.OnClick
                 emptyInputEditText();
                 startActivity(intentChatting);
                 break;
-            case R.id.appCompatButtonRegister:
-                // Navigate to Chat Activity
-                Intent intentRegister = new Intent(getApplicationContext(), RegisterActivity.class);
-                //intentChatting.putExtra("key_email",email);
-                startActivity(intentRegister);
+            case R.id.appCompatTextViewEditProfileLink:
+                // Navigate to Profile Activity
+                Intent intentProfile = new Intent(getApplicationContext(), ProfileActivity.class);
+                intentProfile.putExtra("key_email",email);
+                startActivity(intentProfile);
                 break;
         }
 
@@ -122,7 +123,7 @@ public class UsersListActivity extends AppCompatActivity implements View.OnClick
             @Override
             protected Void doInBackground(Void... params) {
                 listUsers.clear();
-                listUsers.addAll(databaseHelper.getAllUser());
+                listUsers.addAll(databaseHelper.getAllUser(email));
                 return null;
             }
             @Override
