@@ -278,10 +278,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     public void sendVerificationEMail() {
 
         try {
-            String stringSenderEmail = "chat.project.2023.neu@gmail.com";
-
-            // Hier muss man E-Mail wechseln (die E-Mail, um die E-Mails mit Code zu bekommen)
-            // String stringReceiverEmail = "hugobadialy@protonmail.com";
+            String stringSenderEmail = "chat.project.2023@gmail.com";
 
             String name = textInputEditTextName.getText().toString().trim();
             String stringReceiverEmail = textInputEditTextEmail.getText().toString().trim();
